@@ -1,19 +1,34 @@
 const bcrypt = require('bcrypt');
-const crypto = require('crypto');
+const db = require('./models/db'); // Adjust this path to your database connection file
 
-// Test data
-const plainTextPassword = 'Lib2836!';
-const storedBcryptHash = '$2b$10$/yJiFDbtD6T0NmKdFwUc6eiSGYNYSCVkwsFG4S4fpQ5eXLY81NweK';
+(async () => {
+    try {
+        // Fetch all users and their PasswordHash values
+        const [users] = await db.query('SELECT UserID, PasswordHash FROM Users');
 
-// Generate the SHA-256 hash of the plain text password
-const sha256Hash = crypto.createHash('sha256').update(plainTextPassword).digest('hex');
-console.log('SHA-256 Hash of the Password:', sha256Hash);
+        for (const user of users) {
+            const userId = user.UserID;
+            const currentPasswordHash = user.PasswordHash;
 
-// Compare the SHA-256 hash with the bcrypt hash
-bcrypt.compare(sha256Hash, storedBcryptHash)
-    .then(isMatch => {
-        console.log('Does the SHA-256 hash match the bcrypt hash?', isMatch);
-    })
-    .catch(err => {
-        console.error('Error comparing hashes:', err);
-    });
+            // Skip rehashing if the PasswordHash is already bcrypt (starts with "$2b$")
+            if (currentPasswordHash.startsWith('$2b$')) {
+                console.log(`User ${userId}: Already migrated.`);
+                continue;
+            }
+
+            // Rehash the current PasswordHash (assumes it's plaintext or SHA-256 hash)
+            const bcryptHash = await bcrypt.hash(currentPasswordHash, 10);
+
+            // Update the database with the bcrypt hash
+            await db.query('UPDATE Users SET PasswordHash = ? WHERE UserID = ?', [bcryptHash, userId]);
+
+            console.log(`User ${userId}: PasswordHash migrated.`);
+        }
+
+        console.log('Password migration completed successfully.');
+    } catch (error) {
+        console.error('Error during password migration:', error);
+    } finally {
+        process.exit();
+    }
+})();

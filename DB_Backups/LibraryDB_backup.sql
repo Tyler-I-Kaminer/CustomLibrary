@@ -87,8 +87,9 @@ CREATE TABLE `users` (
   `PasswordHash` varchar(255) DEFAULT NULL,
   `Name` varchar(255) DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
+  `Role` varchar(20) DEFAULT 'user',
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +98,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Alka_Kaminer','4245d01535871323159eef2df0e9afc32cc2d250db68030e37104a556a2f6876','Alka Kaminer','Alka@livehappywithin.com'),(2,'Brian_Kaminer','c1f70dbbfbbef097b3cc1e41a616210960a8687bf35f52454f2909ad433b1770','Brian Kaminer','Brian@livehappywithin.com'),(3,'Tyler_Kaminer','c8107835c8f1d8731361da2c660726cb197d9d1502cffdbe39e3a6ffe79b6dcc','Tyler Kaminer','Tyler@livehappywithin.com');
+INSERT INTO `users` VALUES (1,'Alka_Kaminer','$2b$10$KpUteUG5H5INS3GEMwrDTujRbDA5UZPoRa2Brhwbmfhn4knL8Gy3y','Alka Kaminer','Alka@livehappywithin.com','user'),(2,'Brian_Kaminer','$2b$10$y1IQQMd8oimtQxqv7H21tOM7rgcvaF3fCQlSyCn/4cfk7jbfEOOuC','Brian Kaminer','Brian@livehappywithin.com','user'),(3,'Tyler_Kaminer','$2b$10$7/I.pdbdTzFBxt5V4QhkreGtINRGQ7rG7oO8TfYenrmMnBY6DTnw.','Tyler Kaminer','Tyler@livehappywithin.com','user'),(4,'TestUser','$2b$10$61LsPYgEZiiZEwKeTKjDG.fJ9BLOPOozHuxsthCXvACuO1dcKo7.W',NULL,'testuser@example.com','user'),(5,'admin','$2b$10$VX242J8DyByjtw50zZhhguq3hkxEvinLiumtdwZONCZjCvfi6t8W2',NULL,'tyler.kaminer1@marist.edu','admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -110,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-05 11:32:25
+-- Dump completed on 2025-01-05 15:19:30

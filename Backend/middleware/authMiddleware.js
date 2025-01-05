@@ -26,3 +26,13 @@ exports.verifyToken = (req, res, next) => {
         return res.status(401).send('Unauthorized');
     }
 };
+
+exports.authorizeRole = (requiredRole) => {
+    return (req, res, next) => {
+        // Check the user's role from the JWT payload
+        if (req.user.role !== requiredRole) {
+            return res.status(403).send('Access denied');
+        }
+        next();
+    };
+};
