@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
+import { getDownloadHistory } from '../controllers/downloadHistoryController.js';
+import verifyToken from '../middleware/authMiddleware.js'; // Default import
+import { authorizeRole } from '../middleware/authMiddleware.js'; // Named import
+
 const router = express.Router();
-const downloadHistoryController = require('../controllers/downloadHistoryController');
-const { verifyToken } = require('../middleware/authMiddleware');
 
-// Fetch download history (protected route)
-router.get('/', verifyToken, downloadHistoryController.getDownloadHistory);
+router.get('/', verifyToken, getDownloadHistory);
 
-module.exports = router;
+export default router;

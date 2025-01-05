@@ -1,35 +1,25 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-exports.verifyToken = (req, res, next) => {
-    // Extract the Authorization header
-    const authHeader = req.headers['authorization'];
+// Middleware to verify token
+export default function verifyToken(req, res, next) {
+    const token = req.headers['authorization'];
 
-    // Check if the Authorization header exists and is properly formatted
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!token) {
         return res.status(403).send('No token provided');
     }
 
-    // Extract the token from the "Bearer <token>" format
-    const token = authHeader.split(' ')[1];
-
     try {
-        // Verify the token using the secret key
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-        // Attach the decoded payload (e.g., userId) to the request object
-        req.userId = decoded.userId;
-
-        // Proceed to the next middleware or route handler
+        req.userId = decoded.userId; // Extract UserID from token payload
         next();
     } catch (error) {
-        console.error('Token verification failed:', error.message); // Debugging log
         return res.status(401).send('Unauthorized');
     }
-};
+}
 
-exports.authorizeRole = (requiredRole) => {
+// Middleware for role-based authorization
+export const authorizeRole = (requiredRole) => {
     return (req, res, next) => {
-        // Check the user's role from the JWT payload
         if (req.user.role !== requiredRole) {
             return res.status(403).send('Access denied');
         }

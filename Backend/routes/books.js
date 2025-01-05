@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
+import { getAllBooks, addBookWithFile } from '../controllers/booksController.js';
+
 const router = express.Router();
-const booksController = require('../controllers/booksController');
 
 // Define routes
-router.get('/', booksController.getAllBooks); // Fetch all books
-router.post('/', booksController.addBook);    // Add a new book
+router.get('/', getAllBooks); // Get all books
+router.post('/upload', addBookWithFile); // Add book with file upload
 
-module.exports = router;
+export default router; // Default export

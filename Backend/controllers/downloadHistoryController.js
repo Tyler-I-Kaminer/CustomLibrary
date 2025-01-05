@@ -1,7 +1,8 @@
-const db = require('../models/db');
+import db from '../models/db.js';
+
 
 // Fetch download history (for authenticated user only)
-exports.getDownloadHistory = async (req, res) => {
+export const getDownloadHistory = async (req, res) => {
     const { page = 1, limit = 10 } = req.query; // Pagination parameters
     const UserID = req.userId; // Extracted from JWT middleware
 
@@ -10,7 +11,7 @@ exports.getDownloadHistory = async (req, res) => {
         const offset = (page - 1) * limit;
 
         // Base query to fetch download history for the authenticated user
-        let query = `
+        const query = `
             SELECT 
                 dh.DownloadID, 
                 dh.DownloadDate, 
