@@ -1,0 +1,28 @@
+{
+  "name": "customlibrary",
+  "version": "1.0.0",
+  "description": "Creating a Custom Lib DB and Front end to hopefully upload to a custom E-Reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix custom-library-frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tyler-I-Kaminer/CustomLibrary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tyler-I-Kaminer/CustomLibrary/issues"
+  },
+  "homepage": "https://github.com/Tyler-I-Kaminer/CustomLibrary#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3"
+  },
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
+  }
+}
