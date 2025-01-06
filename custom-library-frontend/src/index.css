@@ -1,13 +1,38 @@
 body {
+  background-color: #020202; /* Deep black background */
+  color: #B6A64B; /* Golden text for primary branding */
+  font-family: 'Poppins', sans-serif;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #B6A64B; /* Golden headers */
+  font-weight: bold;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #5F5522; /* Muted gold for buttons */
+  color: #fff; /* White text for contrast */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #726A32; /* Highlighted button hover */
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+      padding: 20px;
+  }
 }

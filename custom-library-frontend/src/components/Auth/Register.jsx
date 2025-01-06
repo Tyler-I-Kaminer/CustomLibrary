@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './Login.css'; // Reuse the Login CSS for the Register page
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -24,36 +25,38 @@ const Register = () => {
             setMessage('Error during registration. Please try again.');
         }
     };
-    
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Register</button>
-            </form>
-            {message && <p>{message}</p>}
-            <p>
-                Already have an account? <Link to="/">Login here</Link>.
-            </p>
+        <div className="login-container"> {/* Use the same container style */}
+            <div className="login-box"> {/* Styled as a box */}
+                <h2>Register</h2>
+                <form onSubmit={handleRegister} className="login-form"> {/* Use the same form styles */}
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button type="submit">Register</button>
+                </form>
+                {message && <p>{message}</p>}
+                <div className="register-box">
+                    <p>Already have an account?</p>
+                    <Link to="/">Login here</Link>
+                </div>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,93 @@
+/* Center the container and add spacing for the logo */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #020202; /* Deep black background */
+    color: #B6A64B; /* Golden text */
+    padding: 20px;
+}
+
+.login-logo {
+    width: 300px; /* Reduced size for better layout */
+    margin-bottom: 30px; /* Ensure proper spacing */
+}
+
+/* Golden outlined box for the form */
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border: 2px solid #B6A64B; /* Golden border */
+    border-radius: 10px;
+    background-color: #121212; /* Slightly lighter black for contrast */
+    box-shadow: 0 0 10px rgba(182, 166, 75, 0.5); /* Soft golden glow */
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #5F5522; /* Muted gold for border */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #121212; /* Subtle black for input background */
+    color: #fff;
+    z-index: 1; /* Ensure inputs are clickable */
+}
+
+.login-form input::placeholder {
+    color: #757233; /* Subdued gold for placeholder text */
+}
+
+.login-form button {
+    padding: 10px 20px;
+    background-color: #5F5522; /* Muted gold */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #726A32; /* Slightly brighter gold */
+}
+
+/* Register box styling */
+.register-box {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px dashed #B6A64B; /* Golden dashed border for register box */
+    border-radius: 10px;
+    background-color: #020202; /* Match background color */
+    text-align: center;
+}
+
+.register-box a {
+    color: #B6A64B; /* Golden link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-box a:hover {
+    text-decoration: underline;
+}

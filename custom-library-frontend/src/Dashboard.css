@@ -1,0 +1,43 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+    padding: 20px;
+    background-color: #020202; /* Black background */
+    color: #B6A64B; /* Golden text */
+}
+
+.dashboard-logo {
+    width: 600px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #757233; /* Subdued gold for secondary text */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #5F5522; /* Muted gold */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #726A32; /* Slightly brighter gold */
+}

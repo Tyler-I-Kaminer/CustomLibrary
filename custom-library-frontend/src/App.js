@@ -5,6 +5,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import './index.css';
 
 const App = () => {
     return (
@@ -17,7 +18,9 @@ const App = () => {
                         path="/Dashboard"
                         element={
                             <ProtectedRoute>
+                              <div>
                                 <Dashboard />
+                              </div>
                             </ProtectedRoute>
                         }
                     />

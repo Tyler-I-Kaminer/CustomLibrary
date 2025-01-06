@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './Login.css';
+import logo from '../../Assets/InvictusHorizonLogo.png';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,44 +12,41 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            // Send a POST request to the backend for login
             const response = await axios.post('http://localhost:3000/users/login', { email, password });
-            
-            // Save the token in localStorage
             localStorage.setItem('token', response.data.token);
-    
-            // Redirect the user to a protected page (e.g., dashboard)
-            alert('Login successful!');
-            window.location.href = '/Dashboard'; // Replace with your actual route
+            window.location.href = '/Dashboard';
         } catch (err) {
-            // Handle login errors
             setError('Invalid email or password');
         }
     };
-    
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <p>
-                Don't have an account? <Link to="/register">Register here</Link>.
-            </p>
+        <div className="login-container">
+            {/* Move logo outside the login-box */}
+            <img src={logo} alt="Invictus Horizon Logo" className="login-logo" />
+            <div className="login-box">
+                <h2>Login</h2>
+                <form onSubmit={handleLogin} className="login-form">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button type="submit">Login</button>
+                </form>
+                {error && <p className="error-message">{error}</p>}
+            </div>
+            <div className="register-box">
+                <p>Don't have an account?</p>
+                <Link to="/register">Register here</Link>
+            </div>
         </div>
     );
 };
