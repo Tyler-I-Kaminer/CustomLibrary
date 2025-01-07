@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import './Login.css';
-import logo from '../../Assets/InvictusHorizonLogo.png';
+import logo from '../../Assets/file.png';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -47,6 +48,10 @@ const Login = () => {
                 <p>Don't have an account?</p>
                 <Link to="/register">Register here</Link>
             </div>
+            {/* Add Back to Landing Page button */}
+            <button onClick={() => navigate('/')} className="btn back-to-landing">
+                    Back to Landing Page
+                </button>
         </div>
     );
 };

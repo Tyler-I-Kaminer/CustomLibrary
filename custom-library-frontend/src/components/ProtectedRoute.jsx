@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
 
     if (!user) {
         console.log('ProtectedRoute - Redirecting to login');
-        return <Navigate to="/" />;
+        return <Navigate to="/login" />;
     }
 
     return children;

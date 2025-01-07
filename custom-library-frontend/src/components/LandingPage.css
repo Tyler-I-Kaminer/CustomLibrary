@@ -1,0 +1,145 @@
+/* Background and Container */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #020202; /* Dark background */
+    color: #B6A64B; /* Gold color for text */
+    text-align: center;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Ship Animation */
+.ship-animation {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.ship {
+    position: absolute;
+    bottom: 0;
+    left: -100px; /* Start off-screen */
+    height: 100px;
+    animation: shipMove 30s linear infinite; /* Ship movement */
+}
+
+@keyframes shipMove {
+    0% {
+        transform: translateX(-200px); /* Start left */
+    }
+    100% {
+        transform: translateX(100vw); /* Move across the screen */
+    }
+}
+
+/* Welcome Message */
+.welcome-message {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    animation: fadeIn 2s ease-in;
+}
+
+.invictus-phrase {
+    font-size: 1rem;
+    margin-top: 10px;
+    font-style: italic;
+    animation: fadeIn 3s ease-in;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    flex-direction: column; /* Align buttons in a single column */
+    gap: 15px; /* Add space between buttons */
+    margin-top: 20px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    background-color: #5F5522; /* Golden theme */
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #B6A64B; /* Brighter gold */
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.landing-container {
+    position: relative;
+    z-index: 1; /* Content appears above snowflakes */
+    color: #fff; /* Ensure text is readable over the background */
+}
+
+/* Snowflake Container */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevent interaction with snowflakes */
+    z-index: -1; /* Above all content */
+}
+
+/* Snowflake */
+.snowflake {
+    position: absolute;
+    top: -10px; /* Start just above the viewport */
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    
+}
+
+/* Snowflake Animation */
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/* Toggle Snow Button */
+.toggle-snow-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #5F5522; /* Golden theme */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-snow-btn:hover {
+    background-color: #B6A64B; /* Brighter gold */
+}

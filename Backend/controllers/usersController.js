@@ -18,16 +18,29 @@ const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
+        // Check if the username or email already exists
+        const [existingUser] = await db.query(
+            'SELECT * FROM Users WHERE username = ? OR email = ?',
+            [username, email]
+        );
+
+        if (existingUser.length > 0) {
+            return res.status(400).json({ message: 'Username or email already exists' });
+        }
+
+        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
-        const result = await db.query(
-            'INSERT INTO Users (Username, Email, PasswordHash) VALUES (?, ?, ?)',
+
+        // Insert the new user into the database
+        const [result] = await db.query(
+            'INSERT INTO Users (username, email, password) VALUES (?, ?, ?)',
             [username, email, hashedPassword]
         );
 
-        res.status(201).json({ message: 'User registered successfully', userId: result[0].insertId });
+        res.status(201).json({ message: 'User registered successfully', userId: result.insertId });
     } catch (error) {
         console.error('Error registering user:', error);
-        res.status(500).send('Server error');
+        res.status(500).json({ message: 'Server error' });
     }
 };
 

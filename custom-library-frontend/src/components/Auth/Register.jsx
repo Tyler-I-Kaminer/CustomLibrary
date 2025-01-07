@@ -14,23 +14,28 @@ const Register = () => {
         try {
             // Send a POST request to the backend for user registration
             await axios.post('http://localhost:3000/users/register', { username, email, password });
-    
+
             // Show a success message and redirect to login
             setMessage('Registration successful! Redirecting to login...');
             setTimeout(() => {
-                window.location.href = '/login'; // Redirect to login page
+                window.location.href = '/';
             }, 2000);
         } catch (err) {
-            // Handle registration errors
-            setMessage('Error during registration. Please try again.');
+            if (err.response && err.response.data && err.response.data.message) {
+                // Display the backend error message
+                setMessage(err.response.data.message);
+            } else {
+                // Generic error for network or unexpected issues
+                setMessage('Error during registration. Please try again.');
+            }
         }
     };
 
     return (
-        <div className="login-container"> {/* Use the same container style */}
-            <div className="login-box"> {/* Styled as a box */}
+        <div className="login-container">
+            <div className="login-box">
                 <h2>Register</h2>
-                <form onSubmit={handleRegister} className="login-form"> {/* Use the same form styles */}
+                <form onSubmit={handleRegister} className="login-form">
                     <input
                         type="text"
                         placeholder="Username"
@@ -54,11 +59,12 @@ const Register = () => {
                 {message && <p>{message}</p>}
                 <div className="register-box">
                     <p>Already have an account?</p>
-                    <Link to="/">Login here</Link>
+                    <Link to="/login">Login here</Link>
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default Register;
