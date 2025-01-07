@@ -56,7 +56,7 @@ const LandingPage = () => {
                 <Link to="/login" className="btn">Login</Link>
                 <Link to="/register" className="btn">Register</Link>
                 <a
-                    href="linkedin.com/in/tyler-kaminer/"
+                    href="https:linkedin.com/in/tyler-kaminer/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn linkedin-btn"
