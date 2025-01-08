@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './components/LandingPage';
 import './index.css';
+import BooksPage from './components/BooksPage';
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                             </ProtectedRoute>
                         }
                     />
+                     <Route path="/books" element={<BooksPage />} />
                 </Routes>
             </Router>
         </AuthProvider>

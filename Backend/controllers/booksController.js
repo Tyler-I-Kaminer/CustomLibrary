@@ -55,12 +55,16 @@ export const addBookWithFile = [
 ];
 
 // Get all books
-export const getAllBooks = async (req, res) => {
+exports.getAllBooks = async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM Books');
-        res.status(200).json(rows);
+        const [books] = await db.query(`
+            SELECT 
+                Title, Author, Series, Genre, Format
+            FROM Books
+        `);
+        res.json(books);
     } catch (error) {
         console.error('Error fetching books:', error);
-        res.status(500).json({ error: 'Failed to fetch books' });
+        res.status(500).json({ message: 'Server error' });
     }
 };

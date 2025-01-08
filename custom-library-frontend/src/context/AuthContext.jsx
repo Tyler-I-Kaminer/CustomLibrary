@@ -18,7 +18,11 @@ export const AuthProvider = ({ children }) => {
             try {
                 const decoded = jwtDecode(token);
                 console.log('AuthContext - Decoded Token:', decoded);
-                setUser(decoded);
+                setUser({
+                    username: decoded.username, // Ensure username is part of user state
+                    role: decoded.role, 
+                    UserID: decoded.userID        // Ensure role is part of user state
+                });
             } catch (error) {
                 console.error('AuthContext - Token Decoding Error:', error);
                 localStorage.removeItem('token'); // Clear invalid token
