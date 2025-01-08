@@ -1,97 +1,60 @@
 .books-page {
     text-align: center;
     padding: 20px;
-    color: #fff;
     background-color: #020202;
+    color: #fff;
     min-height: 100vh;
 }
 
-.header {
+/* Navbar Styling */
+.navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
-    margin-bottom: 20px;
-}
-
-.nav-button {
-    padding: 10px 15px;
-    background-color: #b6a64b;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.nav-button:hover {
-    background-color: #ffcc00;
+    background-color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .search-bar {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.search-bar input {
+    flex-grow: 1;
     padding: 10px;
-    width: 70%;
-    max-width: 500px;
-    border: 2px solid #b6a64b;
     border-radius: 5px;
-    background-color: #020202;
+    border: 1px solid #b6a64b;
+    background-color: #222;
     color: #fff;
+    margin-right: 10px;
 }
 
-.search-bar input::placeholder {
-    color: #b6a64b;
-}
-
-.actions {
-    margin: 20px 0;
-}
-
-.actions button {
-    padding: 10px 20px;
-    margin: 10px;
+.navbar-button {
+    padding: 10px 15px;
     background-color: #b6a64b;
-    color: #fff;
+    color: #020202;
     border: none;
     border-radius: 5px;
+    margin: 0 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.actions button:hover {
-    background-color: #ffcc00;
+.navbar-button:hover {
+    background-color: #726a32;
 }
 
+/* Books Grid Styling */
 .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
-    width: 90%;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    margin-top: 20px;
-    border: 2px solid #b6a64b;
-    border-radius: 10px;
-    background-color: #5f5522;
+    padding: 20px;
 }
 
 .book-card {
-    background-color: #726a32;
-    color: #fff;
+    background-color: #333;
+    padding: 15px;
+    border-radius: 5px;
     border: 1px solid #b6a64b;
-    border-radius: 5px;
-    padding: 10px;
     text-align: center;
-}
-
-.book-cover {
-    max-width: 100%;
-    border-radius: 5px;
-}
-
-.book-details {
-    margin-top: 10px;
 }

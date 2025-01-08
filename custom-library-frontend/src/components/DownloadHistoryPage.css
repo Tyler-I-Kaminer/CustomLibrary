@@ -1,0 +1,101 @@
+.download-history-page {
+    padding: 20px;
+    background-color: #020202;
+    color: #fff;
+    min-height: 100vh;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #333;
+    margin-bottom: 20px;
+}
+
+.nav-button {
+    padding: 10px 20px;
+    background-color: #b6a64b;
+    color: #020202;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #726a32;
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.history-card {
+    background-color: #333;
+    border: 1px solid #b6a64b;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: left;
+    color: #fff;
+}
+
+.history-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #b6a64b;
+}
+
+.history-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination-button {
+    padding: 10px 15px;
+    background-color: #b6a64b;
+    color: #020202;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+    background-color: #726a32;
+}
+
+.pagination-button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+.admin-controls {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.admin-controls label {
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+#user-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #b6a64b;
+    background-color: #222;
+    color: #fff;
+}

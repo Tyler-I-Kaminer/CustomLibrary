@@ -4,18 +4,23 @@ import axios from 'axios';
 import './BooksPage.css';
 
 const BooksPage = () => {
-    const [books, setBooks] = useState([]);
-    const [filteredBooks, setFilteredBooks] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [books, setBooks] = useState([]);
+    const [search, setSearch] = useState('');
+    const [error, setError] = useState('');
+
+    const filteredBooks = books.filter(
+        (book) =>
+            (book.Title || '').toLowerCase().includes(search.toLowerCase()) ||
+            (book.Author || '').toLowerCase().includes(search.toLowerCase()) ||
+            (book.Genre || '').toLowerCase().includes(search.toLowerCase())
+    );
 
     useEffect(() => {
         const fetchBooks = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/books');
                 setBooks(response.data);
-                setFilteredBooks(response.data); // Set initial filtered books
             } catch (err) {
                 console.error('Error fetching books:', err);
                 setError('Unable to fetch books. Please try again later.');
@@ -25,52 +30,36 @@ const BooksPage = () => {
         fetchBooks();
     }, []);
 
-    // Handle search input
-    const handleSearch = (e) => {
-        setSearchTerm(e.target.value);
-        const filtered = books.filter((book) =>
-            book.Title.toLowerCase().includes(e.target.value.toLowerCase()) ||
-            book.Author?.toLowerCase().includes(e.target.value.toLowerCase()) ||
-            book.Genre?.toLowerCase().includes(e.target.value.toLowerCase())
-        );
-        setFilteredBooks(filtered);
-    };
-
     return (
         <div className="books-page">
-            <div className="header">
-                <button onClick={() => navigate('/dashboard')} className="nav-button">Go Back to Dashboard</button>
-                <button onClick={() => navigate('/')} className="nav-button">Logout</button>
-            </div>
-            <h1>Books</h1>
-            <div className="search-bar">
+            <header className="navbar">
                 <input
                     type="text"
-                    placeholder="Search by title, author, or genre..."
-                    value={searchTerm}
-                    onChange={handleSearch}
+                    placeholder="Search books..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="search-bar"
                 />
-            </div>
-            <div className="actions">
-                <button onClick={() => alert('View Download History')}>View Download History</button>
-                <button onClick={() => alert('Upload Books')}>Upload Books</button>
-            </div>
+                <button onClick={() => navigate('/upload')} className="navbar-button">
+                    Upload
+                </button>
+                <button onClick={() => navigate('/download-history')} className="navbar-button">
+                    Download History
+                </button>
+                <button onClick={() => navigate('/dashboard')} className="navbar-button">
+                    Back to Dashboard
+                </button>
+            </header>
+
             {error && <p className="error">{error}</p>}
             <div className="books-grid">
                 {filteredBooks.map((book) => (
                     <div className="book-card" key={book.BookID}>
-                        <img
-                            src={book.CoverImageURL || 'https://via.placeholder.com/150'}
-                            alt={book.Title}
-                            className="book-cover"
-                        />
-                        <div className="book-details">
-                            <h3>{book.Title}</h3>
-                            <p>Author: {book.Author || 'Unknown'}</p>
-                            <p>Series: {book.Series || 'N/A'}</p>
-                            <p>Genre: {book.Genre || 'Unknown'}</p>
-                            <p>Format: {book.Format || 'N/A'}</p>
-                        </div>
+                        <h3>{book.Title}</h3>
+                        <p>Author: {book.Author || 'Unknown'}</p>
+                        <p>Series: {book.Series || 'N/A'}</p>
+                        <p>Genre: {book.Genre || 'Unknown'}</p>
+                        <p>Format: {book.Format || 'N/A'}</p>
                     </div>
                 ))}
             </div>

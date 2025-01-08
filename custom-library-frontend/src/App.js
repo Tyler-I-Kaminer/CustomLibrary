@@ -8,6 +8,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './components/LandingPage';
 import './index.css';
 import BooksPage from './components/BooksPage';
+import UploadPage from './components/UploadPage'
+import DownloadHistoryPage from './components/DownloadHistoryPage'
+import NotFoundPage from './components/NotFoundPage'
 
 const App = () => {
     return (
@@ -28,6 +31,9 @@ const App = () => {
                         }
                     />
                      <Route path="/books" element={<BooksPage />} />
+                     <Route path="/upload" element={<UploadPage />} />
+                    <Route path="/download-history" element={<DownloadHistoryPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </Router>
         </AuthProvider>

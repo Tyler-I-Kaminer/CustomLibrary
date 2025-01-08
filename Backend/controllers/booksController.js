@@ -55,7 +55,7 @@ export const addBookWithFile = [
 ];
 
 // Get all books
-exports.getAllBooks = async (req, res) => {
+export const getAllBooks = async (req, res) => {
     try {
         const [books] = await db.query(`
             SELECT 

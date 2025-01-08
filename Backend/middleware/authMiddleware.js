@@ -11,6 +11,7 @@ export default function verifyToken(req, res, next) {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = decoded.userId; // Extract UserID from token payload
+        req.userRole = decoded.role;
         next();
     } catch (error) {
         return res.status(401).send('Unauthorized');

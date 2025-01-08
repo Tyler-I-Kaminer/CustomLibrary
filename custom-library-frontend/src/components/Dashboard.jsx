@@ -49,10 +49,11 @@ const Dashboard = () => {
             <p>Your role: {user?.role || 'unknown'}</p>
             <input
                 type="text"
+                className="search-bar"
                 placeholder="Search books..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="search-bar"
+                
             />
             <h1 
                 onClick={() => navigate('/books')} 
