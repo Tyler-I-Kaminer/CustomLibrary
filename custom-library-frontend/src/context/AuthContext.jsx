@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
                 setUser({
                     username: decoded.username, // Ensure username is part of user state
                     role: decoded.role, 
-                    userID: decoded.userID        // Ensure role is part of user state
+                    userID: decoded.userID || decoded.userId,        // Ensure role is part of user state
                 });
             } catch (error) {
                 console.error('AuthContext - Token Decoding Error:', error);

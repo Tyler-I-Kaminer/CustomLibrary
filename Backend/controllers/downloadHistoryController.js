@@ -1,22 +1,21 @@
-exports.getDownloadHistory = async (req, res) => {
-    const { userId } = req.query; // Get userId from query string
-    const requesterId = req.userId; // Get userId from token
-    const requesterRole = req.userRole;
+const getDownloadHistory = async (req, res) => {
+    const { userID } = req.query;
+    const requesterId = req.user.userId;
+    const requesterRole = req.user.role;
+    const isAdmin = req.user.role === 'admin';
 
-    // Ensure userId is provided
-    if (!userId) {
-        return res.status(400).json({ error: 'User ID is required' });
+    if (!userID || isNaN(userID)) {
+        return res.status(400).json({ message: 'Invalid userID. Must be a numeric value.' });
     }
-
-    // Authorization check
-    if (requesterRole !== 'admin' && userId !== requesterId) {
+    
+    if (userID !== requesterId && requesterRole !== 'admin') {
         return res.status(403).json({ error: 'Access denied' });
     }
 
     try {
         const downloadHistory = await db.query(
             'SELECT * FROM DownloadHistory WHERE UserID = ? ORDER BY DownloadDate DESC',
-            [userId]
+            [userID]
         );
         res.json(downloadHistory[0]);
     } catch (err) {
@@ -24,3 +23,4 @@ exports.getDownloadHistory = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+export default getDownloadHistory;

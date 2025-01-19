@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 const DownloadHistoryPage = () => {
     const { user } = useAuth();
+    console.log('AuthContext user:', user);
     const [downloadHistory, setDownloadHistory] = useState([]);
     const [currentPage] = useState(1);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState('');
+    const [selectedUser, setSelectedUser] = useState(''); // Default is blank
     const navigate = useNavigate();
 
     const isAdmin = user?.role === 'admin';
@@ -39,16 +40,21 @@ const DownloadHistoryPage = () => {
     useEffect(() => {
         const fetchDownloadHistory = async () => {
             setLoading(true);
-            const userIdToFetch = selectedUser || user?.userId;
-            if (!userIdToFetch) {
-                console.error('No userId available.');
-                setError('Unable to fetch download history: Missing userId.');
+
+            // Determine which userID to fetch
+            const userIDToFetch = selectedUser || user?.userID;
+            console.log('Fetching download history for userID:', userIDToFetch);
+
+            if (!userIDToFetch) {
+                console.error('No userID available.');
+                setError('Unable to fetch download history: Missing userID.');
+                setLoading(false);
                 return;
             }
 
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/download-history?page=${currentPage}&limit=${limit}&userId=${userIdToFetch}`,
+                    `http://localhost:3000/download-history?page=${currentPage}&limit=${limit}&userID=${userIDToFetch}`,
                     {
                         headers: {
                             Authorization: localStorage.getItem('token'),
@@ -56,14 +62,15 @@ const DownloadHistoryPage = () => {
                     }
                 );
                 setDownloadHistory(response.data);
+                setError(''); // Clear previous errors
             } catch (err) {
                 console.error('Error fetching download history:', err);
                 setError('Unable to fetch download history. Please try again later.');
             } finally {
-                            setLoading(false);
-                        }
-                    };
-                
+                setLoading(false);
+            }
+        };
+
         fetchDownloadHistory();
     }, [currentPage, selectedUser, user]);
 
@@ -75,7 +82,7 @@ const DownloadHistoryPage = () => {
                 <button onClick={() => navigate('/')}>Logout</button>
             </header>
             <h1>Download History</h1>
-    
+
             {isAdmin && (
                 <div className="admin-controls">
                     <label htmlFor="user-select">View history for:</label>
@@ -86,14 +93,14 @@ const DownloadHistoryPage = () => {
                     >
                         <option value="">My History</option>
                         {users.map((userItem) => (
-                            <option key={userItem.UserID} value={userItem.UserID}>
-                                {userItem.Username}
+                            <option key={userItem.userID} value={userItem.userID}>
+                                {userItem.Username} {/* Display username but use userID as value */}
                             </option>
                         ))}
                     </select>
                 </div>
             )}
-    
+
             {loading && <p>Loading...</p>}
             {error && <p className="error">{error}</p>}
             <div className="history-grid">
@@ -111,6 +118,6 @@ const DownloadHistoryPage = () => {
             </div>
         </div>
     );
-    };
-    
-    export default DownloadHistoryPage;
+};
+
+export default DownloadHistoryPage;
